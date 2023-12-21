@@ -1,0 +1,1 @@
+ll binmod(ll a ,ll b){if(b==0) return 1; ll res=binmod(a,b/2); res*=res; if(b&1) res=(res% M)*(a%M);return res%M;}
