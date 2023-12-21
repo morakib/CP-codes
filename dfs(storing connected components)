@@ -1,0 +1,37 @@
+const int N=1e5+10;
+vector<int> graph[N];
+bool visited[N];
+vector<vector<int>> Con_Com;
+vector<int>cur_con_com;
+void dfs (int vertex){
+    visited[vertex]=true;
+    cur_con_com.push_back(vertex);
+    for(int child: graph[vertex]){
+        if(visited[child]) continue;
+        dfs(child);  
+    }
+}
+void lessgo(){
+    int n,m;
+    cin>>n>>m;
+    for(int i=0;i<m;i++){
+        int vertex1,vertex2;
+        cin>>vertex1>>vertex2;
+        graph[vertex1].push_back(vertex2);
+        graph[vertex2].push_back(vertex1);
+    }
+    int connected_components=0;
+    for(int i=1;i<=n;i++){
+        if(visited[i]) continue;
+        cur_con_com.clear();
+        dfs(i);
+        Con_Com.push_back(cur_con_com);
+    }
+    cout<<Con_Com.size()<<endl;
+    for(auto c_cc:Con_Com){
+        for(int vertex: c_cc){
+            cout<<vertex<<" ";
+        }
+        cout<<endl;
+    }
+}
