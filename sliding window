@@ -1,0 +1,30 @@
+map<int,int>mp;
+int cnt=0;
+void add(int val){
+    if(mp[val]==0) cnt++;
+    mp[val]++;
+}
+void remove(int val){
+    mp[val]--;
+    if(mp[val]==0) cnt--;
+}
+int main(){
+
+    //don't forget to clear the map 
+    
+    //taking inputs of array length and length of sliding window
+
+    //taking input of array
+
+    //add elements of the length of sliding window add(A[i])
+    
+    //after adding there will be a cnt,will store in ans
+
+    //now iterate from d(length of sliding window) to last element of array
+
+    //for each i calculate add(A[i]),remove(A[i]),and process needs for required problem
+
+    ///output ans
+}
+
+
