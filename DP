@@ -1,0 +1,57 @@
+******Counting problem e valid state theke 1, invalid state theke 0 return kori.
+******Minimization problem e invalid state theke +INF.
+******Maximization problem e invalid state thekd -INF.
+////1-->>COIN MAXIMIZATION 
+const int N=105;
+int nCoins,neededSum;
+vector<int> coins;
+int dp[N][101];
+int f(int amount,int index){
+
+    if(index==coins.size()){
+        if(amount==neededSum) return 1;
+        else                  return 0;
+    }
+
+    if(amount>neededSum) return 0;
+    if(dp[amount][index]!=-1) return dp[amount][index];
+    int res=0;
+
+    res+=f(amount,index+1);
+    res+=f(amount+coins[index],index);
+
+    return dp[amount][index]=res;
+
+}
+void lessgo(){
+    cin>>nCoins>>neededSum;
+    memset(dp,-1,sizeof dp);
+    for(int i=0;i<nCoins;i++){
+        int x;cin>>x;coins.pb(x);
+    }
+    sort(all(coins));
+    cout<<f(0,0);
+}
+////2-->>knapsack
+#define INF (1LL<<62)
+const int N=105;
+int n,w;
+ll weight[N],price[N];
+ll dp[N][100005];
+ll f(ll index,ll rem){
+    if(rem<0) return -INF;
+    if(index==n) return 0;
+    if(dp[index][rem]!=-1) return dp[index][rem];
+    ll ans=-INF;
+    ans=max(ans,price[index]+f(index+1,rem-weight[index]));
+    ans=max(ans,f(index+1,rem));
+    return dp[index][rem]=ans;
+}
+void lessgo(){
+    cin>>n>>w;
+    memset(dp,-1,sizeof dp);
+    for(ll i=0;i<n;i++){
+        cin>>weight[i]>>price[i];
+    }
+    cout<<f(0,w);
+}
