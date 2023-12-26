@@ -1,0 +1,23 @@
+ll binexp(ll a,ll b ){
+    if(b==0) return 1;
+    if(b%2==0){
+        ll x=binexp(a,b/2);
+        return (x*x)% mod;
+    }else{
+        ll x=binexp(a,b/2);
+        return ((x*x)% mod *a)% mod;
+    }
+}
+ll inmod(ll a){
+    return binexp(a,mod-2);
+}
+ll ncrmod(ll n,ll r){
+    if(r==0) return 1;
+    if(r>n)  return 0;
+    return (fact[n]* inmod((fact[r]*fact[n-r])%mod))% mod;
+}
+ll nprmod(ll n,ll r){
+    if(r==0) return 1;
+    if(r>n)  return 0;  
+    return (fact[n]* fact[n-r])% mod;
+}
